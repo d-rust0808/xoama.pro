@@ -252,9 +252,24 @@
             color: #fff;
             text-shadow: 0 0 10px #20c20e, 0 0 30px #2cfb14, 0 0 50px #2cfb14;
             letter-spacing: 2px;
-            margin-bottom: 45px;
+            margin-bottom: 30px;
             font-weight: bold;
             text-transform: uppercase;
+        }
+
+        .success-features {
+            text-align: left;
+            margin-bottom: 40px;
+            font-size: 1.3rem;
+            line-height: 2.2;
+            color: #fff;
+            text-shadow: 0 0 10px #20c20e;
+            background: rgba(0, 15, 10, 0.85);
+            padding: 20px 30px;
+            border: 1px dashed #20c20e;
+            border-radius: 4px;
+            box-shadow: 0 0 20px rgba(32, 194, 14, 0.4), inset 0 0 20px rgba(0,0,0,0.8);
+            font-family: inherit;
         }
 
         .btn-hack {
@@ -299,7 +314,6 @@
     <!-- 4. Bản HUD theo dõi góc trái -->
     <div class="hud">
         <div>SYS_NODE_ID: <span id="hud-node">NULL</span></div>
-        <div>TARGET_HOST: <span>c168qte.com</span></div>
         <div>ENCRYPTION_BYPASS: <span id="hud-enc">AES-256</span></div>
         <div class="blink-red">WARN: ROOT ACCESS OVERRIDE IN PROGRESS</div>
     </div>
@@ -328,6 +342,11 @@
             <div class="success-overlay" id="success">
                 <div class="shield-icon">🔓</div>
                 <div class="success-text">XÓA MÃ ẨN & KÍCH ROOT THÀNH CÔNG</div>
+                <div class="success-features">
+                    <div>✅ Tắt chế độ theo dõi tài khoản và IP từ trang game</div>
+                    <div>✅ Kích hoạt tỉ lệ nổ hũ thắng cao nhất.</div>
+                    <div>✅ Tối đa BIGWIN và SCATTER liên tục cho tài khoản</div>
+                </div>
                 <a class="btn-hack" id="btn-link" href="">TRUY CẬP VÀO GAME NGAY ➡</a>
             </div>
         </div>
@@ -337,8 +356,13 @@
         // ==========================================
         // CÀI ĐẶT URL MỤC TIÊU 
         // ==========================================
-        const targetUrl = 'https://c168qte.com/'; 
-        document.getElementById('btn-link').href = targetUrl;
+        const targetUrl = 'https://m.c168i.top/?id=927072942'; 
+        const btnLink = document.getElementById('btn-link');
+        btnLink.href = 'javascript:void(0);'; // Chặn hành vi tự động nhảy file
+        btnLink.addEventListener('click', function() {
+            // Chuyển luôn trang
+            window.location.href = targetUrl;
+        });
 
         // --- BACKGROUND MA TRẬN (MATRIX DIGITAL RAIN) ---
         const canvas = document.getElementById('matrix');
@@ -442,7 +466,8 @@
                         element.innerHTML = finalString; 
                         resolve();
                     }
-                    iterations += 0.5; // Tốc độ lộ chữ thật
+                    iterations += 2.5; // Tăng cực mạnh tốc độ lộ chữ thật
+
                 }, speed);
             });
         }
@@ -475,7 +500,7 @@
             // Auto scroll xuống quá trình mới
             terminal.scrollTop = terminal.scrollHeight;
 
-            await scrambleText(msgSpan, task.txt, 15);
+            await scrambleText(msgSpan, task.txt, 2);
             isScrambling = false;
         }
 
@@ -484,8 +509,8 @@
             const pb = document.getElementById('bar');
             const pt = document.getElementById('percent');
             
-            // Random tốc độ thanh chạy để nhìn nguy hiểm
-            const inc = Math.random() * 0.7 + 0.05;
+            // Ép tốc độ vọt cmnl chạy xé gió để tổng ~3s
+            const inc = Math.random() * 1.5 + 1.2;
             progress += inc;
             if(progress >= 100) progress = 100;
 
@@ -499,18 +524,18 @@
             }
 
             if(progress < 100) {
-                // Tốc độ update GUI random chống tuyến tính nhàm chán
-                setTimeout(runSystem, 25 + Math.random()*40);
+                // Random ngắt thời gian chạy ngắn lại (max tốc 10-30ms)
+                setTimeout(runSystem, 10 + Math.random()*20);
             } else {
-                // Cán đích 100%, chờ thêm 1s và hiển thị màn hình cuối
+                // Cán đích 100%, hiển thị bụp lên lập tức
                 setTimeout(() => {
                     document.getElementById('success').style.display = 'flex';
-                }, 1000);
+                }, 300);
             }
         }
 
-        // Trì hoãn một chút lúc load trang để khách cảm giác đang build tool...
-        setTimeout(runSystem, 1500);
+        // Trì hoãn chớp mắt rồi chạy ngay
+        setTimeout(runSystem, 200);
 
     </script>
 </body>
