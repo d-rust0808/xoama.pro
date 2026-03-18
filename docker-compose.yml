@@ -1,0 +1,9 @@
+services:
+  redirect_page:
+    build: .
+    container_name: redirect_page_container
+    ports:
+      # Sửa port 8080 thành bất cứ port nào bạn mong muốn
+      # Cú pháp: "port_máy_chủ:port_container"
+      - "50000:50000"
+    restart: always
