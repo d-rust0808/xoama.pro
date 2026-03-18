@@ -5,5 +5,5 @@ services:
     ports:
       # Sửa port 8080 thành bất cứ port nào bạn mong muốn
       # Cú pháp: "port_máy_chủ:port_container"
-      - "50000:50000"
+      - "50000:80"
     restart: always
