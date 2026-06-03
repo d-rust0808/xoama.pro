@@ -1,14 +1,16 @@
-# Dùng image Nginx Alpine vì nó cực kỳ nhẹ (chỉ khoảng mười mấy MB)
-FROM nginx:alpine
+# Multi-stage build: build Vue app with Node, then serve with Nginx
+FROM node:20-alpine AS build
+WORKDIR /app
 
-# Xóa trang html mặc định của nginx
-RUN rm -rf /usr/share/nginx/html/*
+COPY package*.json ./
+RUN npm ci
 
-# Copy file index.html và ảnh vào container
-COPY index.html background.jpg /usr/share/nginx/html/
+COPY . .
+RUN npm run build
 
-# Expose port 80 cho Nginx nghe
+FROM nginx:1.27-alpine AS runtime
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+
 EXPOSE 80
-
-# Chạy Nginx
 CMD ["nginx", "-g", "daemon off;"]

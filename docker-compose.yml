@@ -1,9 +1,18 @@
 services:
-  redirect_page:
-    build: .
-    container_name: redirect_page_container
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: c168kmk.pro-frontend
     ports:
-      # Sửa port 8080 thành bất cứ port nào bạn mong muốn
-      # Cú pháp: "port_máy_chủ:port_container"
-      - "50000:80"
-    restart: always
+      - "20204:80"
+    restart: unless-stopped
+    networks:
+      - c168kmk.pro-network
+
+networks:
+  c168kmk.pro-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.124.0.0/24
