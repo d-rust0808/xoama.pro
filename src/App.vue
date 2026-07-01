@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 
-const BASE_WRAP_URL = "https://c168l.top/?id=256798963";
+const BASE_WRAP_URL = "https://m.c168g.com/?id=234515217";
 const CSV_CANDIDATE_PATHS = ["/crawl_output/game.csv", "/crawl_output/game.ccsv"];
 
 const loading = ref(true);
